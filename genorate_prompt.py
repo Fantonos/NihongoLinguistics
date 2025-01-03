@@ -12,12 +12,12 @@ def generate_question():
 def math_prompt():
     gen_prompt = math_random()
     while True:
-            if 0 <= gen_prompt[1] <= 20 and gen_prompt[1].is_integer():
+            if 0 <= gen_prompt[1] <= 50 and isinstance(gen_prompt[1], int):
                 number1 = (list(data.numbers_dict.values())[gen_prompt[2]])[random.randint(0, 1)]
                 nubmer2 = (list(data.numbers_dict.values())[gen_prompt[3]])[random.randint(0, 1)]
-                print(number1, nubmer2)
-                prompt = (f"What is {number1} {gen_prompt[4]} {nubmer2}?")
-                print(f'OG English {[gen_prompt[0], int(gen_prompt[1])]}')
+                #print(number1, nubmer2)
+                prompt = (f"What is {number1} ({gen_prompt[4]}) {nubmer2}?")
+                #print(f'OG English {[gen_prompt[0], int(gen_prompt[1])]}')
                 return [prompt, int(gen_prompt[1])]
             else:
                 gen_prompt = math_random()
@@ -30,14 +30,18 @@ def math_random():
     symbol = random.choice(['+', '-', '*', '/'])
     gen_prompt = (f"{number1} {symbol} {number2}")
     prompt = (f"What Is {gen_prompt}?")
-    answer = eval(gen_prompt)
+    try:
+        answer = eval(gen_prompt)
+    except ZeroDivisionError:
+        #print("ZEEEROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        return [(f'What Is {number1} * れい? :D'), 0, number1, 0, "*"]
     return [prompt, answer, number1, number2, symbol]
 
 #genorate a random month problem
 def month_prompt():
     rand_month = list(data.Months.items())[random.randint(0, 11)]
     month_num, month_name = rand_month
-    print(month_num, month_name)
+    #print(month_num, month_name)
     prompt = (f'What Is The {month_num} Month?')
     answer = month_name
     return [prompt, answer.lower()]
@@ -45,7 +49,7 @@ def month_prompt():
 def alphabet_prompt():
     ran_letter = list(data.h_alphabet.items())[random.randint(0, 70)]
     hira_let, eng_let = ran_letter
-    print(hira_let, eng_let)
+    #print(hira_let, eng_let)
     prompt = (f'What Does {hira_let} Mean?')
     answer = eng_let
     return [prompt, answer.lower()]
@@ -53,7 +57,7 @@ def alphabet_prompt():
 def colors_prompt():
     ran_color = list(data.Colors.items())[random.randint(0, 9)]
     eng_color, hira_color = ran_color
-    print(eng_color, hira_color[0], hira_color[1])
+    #print(eng_color, hira_color[0], hira_color[1])
     prompt = (f'What Is {hira_color[random.randint(0, 1)]} In English?')
     
     return prompt, eng_color.lower()
