@@ -42,5 +42,9 @@
 
 
 ## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+This project is open-source and available under the MIT License.
+
+[Creative Commons Zero v1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+
 
